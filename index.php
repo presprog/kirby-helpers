@@ -22,13 +22,18 @@ function path(...$fragments): string
  *
  * @return string
  */
-function inline_svg(string $file): string
+function inline_svg(string $file, string $class = null): string
 {
     $svg = F::read($file);
+
+    if ($class) {
+        $svg = str_replace('<svg', sprintf('<svg class="%s"', $class), $svg);
+    }
+
     return $svg ?: '';
 }
 
-function inline_icon(Field|string $icon): string
+function inline_icon(Field|string $icon, string $class = null): string
 {
     if ($icon instanceof Field) {
         $icon = $icon->value();
@@ -40,5 +45,5 @@ function inline_icon(Field|string $icon): string
         $source = $source();
     }
 
-    return inline_svg(path($source, $icon));
+    return inline_svg(path($source, $icon), $class);
 }

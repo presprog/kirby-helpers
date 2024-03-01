@@ -2,6 +2,8 @@
   "name": "presprog/kirby-helpers",
   "description": "Provides some tiny helper functions we use frequently in our Kirby projects",
   "require": {
+    "php": "^8.2",
+    "ext-simplexml": "*",
     "getkirby/composer-installer": "^1.2"
   },
   "require-dev": {
