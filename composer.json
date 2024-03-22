@@ -1,5 +1,6 @@
 {
   "name": "presprog/kirby-helpers",
+  "type": "kirby-plugin",
   "description": "Provides some tiny helper functions we use frequently in our Kirby projects",
   "require": {
     "php": "^8.2",
