@@ -17,12 +17,8 @@ function path(...$fragments): string
 
 /**
  * Reads an SVG file and returns it as string.
- *
- * @param string $file
- *
- * @return string
  */
-function inline_svg(string $file, string $class = null): string
+function inline_svg(string $file, string|null $class = null): string
 {
     $svg = F::read($file);
 
@@ -33,7 +29,7 @@ function inline_svg(string $file, string $class = null): string
     return $svg ?: '';
 }
 
-function inline_icon(Field|string $icon, string $class = null): string
+function inline_icon(Field|string $icon, string|null $class = null): string
 {
     if ($icon instanceof Field) {
         $icon = $icon->value();
