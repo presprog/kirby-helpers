@@ -16,14 +16,19 @@ function path(...$fragments): string
 }
 
 /**
- * Reads an SVG file and returns it as string.
+ * Reads an SVG file and returns it as string. You may add CSS classes or other attributes like `data`.
+ * Be aware that attributes are simply appended - they will not be merged with existing attributes on the SVG, e.g. you cannot overwrite `width`, `height` or `viewBox`.
  */
-function inline_svg(string $file, string|null $class = null): string
+function inline_svg(string $file, string|null $class = null, array $attributes = []): string
 {
     $svg = F::read($file);
 
     if ($class) {
-        $svg = str_replace('<svg', sprintf('<svg class="%s"', $class), $svg);
+        $attributes['class'] = ($attributes['class'] ?? '') ? join(' ', [$attributes['class'], $class]): $class;
+    }
+
+    foreach ($attributes as $key => $value) {
+        $svg = str_replace('<svg', sprintf('<svg %s="%s"', $key, htmlspecialchars($value, ENT_QUOTES, 'UTF-8')), $svg);
     }
 
     return $svg ?: '';
